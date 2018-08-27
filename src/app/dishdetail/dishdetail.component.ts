@@ -31,7 +31,8 @@ export class DishdetailComponent implements OnInit {
   feedbackForm: FormGroup;
   feedback: Feedback;
   comments: Comment;
-
+  errMess: string;
+  
   formErrors = {
     'author': '',
     'rating': '',
@@ -57,6 +58,7 @@ export class DishdetailComponent implements OnInit {
     }
 
   createForm() {
+    
       this.feedbackForm = this.fb.group({
         author: ['', [Validators.required, Validators.minLength(2)]],
         rating: 5,
@@ -64,7 +66,8 @@ export class DishdetailComponent implements OnInit {
       });
 
       this.feedbackForm.valueChanges
-      .subscribe(data => this.onValueChanged(data));
+      .subscribe(data => this.onValueChanged(data),
+      errmess => this.errMess = <any>errmess);
 
       this.onValueChanged(); // (re)set validation messages now
     }
