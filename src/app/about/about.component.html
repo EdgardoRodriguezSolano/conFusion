@@ -58,7 +58,7 @@
     <h2>Corporate Leadership</h2>
 
 
-    <mat-list cols="1"  *ngFor="let leader of leaders" [routerLink]="['/aboutus', leader.id]">
+    <mat-list cols="1"  *ngFor="let leader of leaders" [routerLink]="['/aboutus', leader.id]" [@expand]>
       <mat-list-item role="listitem">
         <img class="round" height="40px" src={{leader.image}} alt={{leader.name}} style="
         border-radius: 50%;">
