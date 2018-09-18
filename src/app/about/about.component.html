@@ -60,7 +60,7 @@
 
     <mat-list cols="1"  *ngFor="let leader of leaders" [routerLink]="['/aboutus', leader.id]" [@expand]>
       <mat-list-item role="listitem">
-        <img class="round" height="40px" src={{leader.image}} alt={{leader.name}} style="
+        <img class="round" height="40px" src="{{BaseURL + leader.image}}" alt={{leader.name}} style="
         border-radius: 50%;">
         <p>{{leader.name}} {{leader.abbr}} <br>
         {{leader.designation}}<br>
@@ -72,9 +72,13 @@
 
     </mat-list>
   </div>
-  <div [hidden]="leaders">
+  <div [hidden]="leaders || leadersErrMess">
     <mat-spinner></mat-spinner><h4>Loading . . . Please Wait</h4>
   </div>
 
+  <div *ngIf="leadersErrMess">
+    <h2>Error</h2>
+    <h4>{{leadersErrMess}}</h4>
+  </div>
 
 </div>

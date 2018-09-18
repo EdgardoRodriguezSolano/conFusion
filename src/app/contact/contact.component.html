@@ -9,7 +9,7 @@
     </div>
   </div>
 
-  <div fxFlex>
+  <div fxFlex >
     <h3>Location Information</h3> 
     <div fxLayout="column" fxLayout.gt-sm="row">
       <div fxFlex="50" fxFlexOffset="20px">
@@ -36,11 +36,39 @@
     </div>
   </div>
 
-<div fxFlex fxFlexOffset="20px" class="form-size">
+<div fxFlex fxFlexOffset="20px" class="form-size" >
     <h3>Send us your Feedback</h3>
 
+    <div *ngIf="visibility === 'shown'">
+      <mat-spinner></mat-spinner><h4>Loading . . . Please Wait</h4>
+    </div>
 
-    <form novalidate [formGroup]="feedbackForm" #fform="ngForm" (ngSubmit)="onSubmit()">
+   <mat-list *ngIf="feedbacks" [@expand]>
+        <h3>Your Submission</h3>
+        <mat-list-item>
+            <p>First Name:&nbsp;{{ feedbacks.firstname }}</p>
+        </mat-list-item>
+        <mat-list-item>
+          <p>Last Name:&nbsp;{{ feedbacks.lastname }}</p>
+        </mat-list-item>
+        <mat-list-item>
+          <p>Tel. Number:&nbsp;{{ feedbacks.telnum }}</p>
+         </mat-list-item>
+        <mat-list-item>
+          <p>Email:&nbsp;{{ feedbacks.email }}</p>
+        </mat-list-item>
+        <mat-list-item>
+          <p>Contact You?:&nbsp;{{ feedbacks.agree }}</p>
+        </mat-list-item>
+        <mat-list-item>
+          <p>How?:&nbsp;{{ feedbacks.contacttype }}</p>
+        </mat-list-item>
+        <mat-list-item>
+          <p>Feedback:&nbsp;{{ feedbacks.message }}</p>
+       </mat-list-item>
+    </mat-list>
+    
+    <form novalidate [formGroup]="feedbackForm" #fform="ngForm" (ngSubmit)="onSubmit()"  *ngIf="visible === 'shown'" [@expand]>
       <p>
           <mat-form-field class="half-width">
               <input matInput formControlName="firstname" placeholder="First Name" type="text" required>
@@ -81,4 +109,7 @@
       <button type="submit" mat-button class="background-primary text-floral-white">Submit</button>
     </form>
   </div>
+
+
+
 </div>
